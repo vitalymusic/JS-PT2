@@ -25,8 +25,7 @@ result2 = {
 }
 
 document.write(`Pašlaik ir: 
-    ${result.datums}.
-    ${result.menesis}.
+    ${result.menesis<10?"0"+result.menesis:result.menesis}.
     ${result.gads}, 
     ${result.stundas}:${result.minutes}:${result.sekundes}`,"<br>");
 
