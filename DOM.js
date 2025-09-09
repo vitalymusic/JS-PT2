@@ -86,3 +86,29 @@ for(let year = 1900;year <= 2025; year++){
         <option value="${year}">${year}</option> 
       `  
 }
+
+
+// 1. Izveidot datu ievades laukus
+// 2. Nolasīt no laukiem nepieciešamos datus
+// Parādīt ar ciklu attēlus no Picsum pēc ievadītiem ID
+
+
+document.body.innerHTML += `
+    <h2>Galerija</h2>
+    <input type="number" id="num1"> -  <input type="number" id="num2">
+    <button id="showPicturesBtn">Parādīt bildes</button>
+    <div class="pictures">
+
+    </div>
+`
+
+document.querySelector('#showPicturesBtn').onclick = ()=>{
+        let num1 = +document.querySelector('#num1').value;
+        let num2 = +document.querySelector('#num2').value;
+
+       for(let bilde = num1; bilde <= num2;bilde++){
+               document.querySelector('.pictures').innerHTML+=`
+                <img src="https://picsum.photos/id/${bilde}/200/300" > 
+               ` 
+       } 
+}
