@@ -43,8 +43,46 @@ virsraksts1.onmouseleave = function(){
 }
 
 document.body.onkeyup = function(event){
-    console.log(event)
+    // console.log(event)
     if(event.key=='Escape'){
          document.body.style.background = "none";
+         document.body.style.fontSize = "1rem";
     }
+}
+
+
+// 3. Satura mainīšana elementā
+virsraksts1.innerText = "Tagad ir jauns virsraksts";
+
+btn2.innerText = "Izlabot dokumenta virsrakstu";
+
+btn2.onclick = ()=>{
+    document.title = virsraksts1.innerText;
+    document.querySelector('div').innerHTML = "";
+}
+
+
+
+document.querySelector('div').innerHTML = `
+    <h3>This is new title</h3>
+    <p class="added_text">Te ir jauns pieivenots teksts</p>
+    <img src="">
+`;
+
+virsraksts1.innerText += " Vēl viens teksts";
+
+document.querySelector('div').innerHTML+=`
+    <form>
+        <select id="select">
+
+
+        </select>
+    </form>
+`;
+
+
+for(let year = 1900;year <= 2025; year++){
+      document.querySelector('#select').innerHTML+=`
+        <option value="${year}">${year}</option> 
+      `  
 }
