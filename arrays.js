@@ -42,13 +42,36 @@ const texts = [
   "Regulārās izteiksmes ir jaudīgas.",
   "DOM manipulācija bez jQuery.",
   "Testēšana uzlabo kodu.",
-  "Labrīt no Rīgas!"
+  "Labrīt no Rīgas!",
+   "Mācos",
 ];
 
 
 texts.forEach(function(item,i,arr){
-    console.log("Nr: "+i+1 + " "+ item);
+    console.log("Nr: "+(i+1) + " "+ item);
+    document.body.innerHTML+=`<h3>${item}</h3>`;
 })
 
 
-// console.log(result.length);
+result = texts.map(function(item,i){
+        return item.toUpperCase();
+})
+
+
+result = texts.filter((item)=>{
+    return item.match("Mācos");
+})
+// result = texts.find((item)=>{
+//     return item.match("Mācos");
+// })
+
+
+result = texts.sort();
+
+// const points = [40, 100, 1, 5, 25, 10];
+// points.sort(function(a, b){return a - b});
+
+
+
+
+console.log(result);
