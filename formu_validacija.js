@@ -14,6 +14,7 @@ form1.onsubmit = (e)=>{
     if(lauki[0].value.length <2){
         errors.push("Ievadiet lūdzu vārdu");
         lauki[0].classList.add('error');
+        lauki[0].parentElement.innerHTML += `<span class="error">${errors[0]}</span>`
     }else{
         lauki[0].classList.remove('error');
     }
