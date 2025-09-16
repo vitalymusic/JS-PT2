@@ -111,7 +111,7 @@ document.querySelector('#showPicturesBtn').onclick = ()=>{
 
        for(let bilde = num1; bilde <= num2;bilde++){
                document.querySelector('.pictures').innerHTML+=`
-                <img src="https://picsum.photos/id/${bilde}/200/300" > 
+                <img src="https://picsum.photos/id/${bilde}/200/300" onclick ="showImage(this)"> 
                ` 
        } 
 

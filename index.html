@@ -1,179 +1,208 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <!-- <script src="js1.js">
         document.write("Hello world!");
         document.write("Hello world!");
         document.write("Hello world!");
 
     </script> -->
-   <!-- <script src="./cikli.js"></script> -->
-   <!-- <script src="./funkcijas.js"></script>
+    <!-- <script src="./cikli.js"></script> -->
+    <!-- <script src="./funkcijas.js"></script>
    <script src="./zarosanas.js"></script>
    <script src="./reg_izteiksmes.js"></script> -->
-   <script src="./datumi.js"></script>
-   
-   <script src="./arrays.js" defer></script>
+    <script src="./datumi.js"></script>
 
-   <script src="./DOM.js" defer></script>
-   <script src="./DOM2.js" defer></script>
-   
+    <script src="./arrays.js" defer></script>
 
-   <style>
+    <script src="./DOM.js" defer></script>
+    <script src="./DOM2.js" defer></script>
+    <script src="./formu_validacija.js" defer></script>
+
+
+    <style>
         /* Variācijas (vieglas pielāgošanas iespējas) */
-:root{
-  --dialog-bg: #ffffff;
-  --dialog-radius: 12px;
-  --dialog-max-width: 520px;
-  --dialog-padding: 20px;
-  --dialog-shadow: 0 12px 30px rgba(16,24,40,0.35);
-  --accent: #0b74de;
-  --text: #111827;
-  --muted: #6b7280;
-  --backdrop-color: rgba(15,23,42,0.55);
-}
+        :root {
+            --dialog-bg: #ffffff;
+            --dialog-radius: 12px;
+            --dialog-max-width: 520px;
+            --dialog-padding: 20px;
+            --dialog-shadow: 0 12px 30px rgba(16, 24, 40, 0.35);
+            --accent: #0b74de;
+            --text: #111827;
+            --muted: #6b7280;
+            --backdrop-color: rgba(15, 23, 42, 0.55);
+        }
 
-/* Dialog pamata izskats */
-.app-dialog{
-  width: min(92vw, var(--dialog-max-width));
-  background: var(--dialog-bg);
-  color: var(--text);
-  border: none;
-  position: fixed;
-  top:400px;
+        /* Dialog pamata izskats */
+        .app-dialog {
+            width: min(92vw, var(--dialog-max-width));
+            background: var(--dialog-bg);
+            color: var(--text);
+            border: none;
+            position: fixed;
+            top: 400px;
 
-  border-radius: var(--dialog-radius);
-  padding: 0;
-  box-shadow: var(--dialog-shadow);
-  transform-origin: center;
-  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-  overflow: hidden;
-}
+            border-radius: var(--dialog-radius);
+            padding: 0;
+            box-shadow: var(--dialog-shadow);
+            transform-origin: center;
+            font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+            overflow: hidden;
+        }
 
-/* Kad dialog nav atvērts, var paslēpt ar display:none ja nepieciešams JS */
-.app-dialog[open]{
-  outline: none; /* izslēdz noklusējuma focus ring; nodrošini pašu fokus stilu zemāk */
-  animation: dialogIn 180ms cubic-bezier(.2,.9,.2,1);
-}
+        /* Kad dialog nav atvērts, var paslēpt ar display:none ja nepieciešams JS */
+        .app-dialog[open] {
+            outline: none;
+            /* izslēdz noklusējuma focus ring; nodrošini pašu fokus stilu zemāk */
+            animation: dialogIn 180ms cubic-bezier(.2, .9, .2, 1);
+        }
 
-/* Backdrop (aktīviem pārlūkiem) */
-::backdrop{
-  /* width: 100%;
+        /* Backdrop (aktīviem pārlūkiem) */
+        ::backdrop {
+            /* width: 100%;
   height:100vh; 
   position: fixed;
   top:0px;  */
-  background: rgba(255, 255, 255, 0.682);
-  backdrop-filter: blur(3px) saturate(1.05);
-  -webkit-backdrop-filter: blur(3px) saturate(1.05);
-  animation: backdropIn 200ms ease-out;
-}
+            background: rgba(255, 255, 255, 0.682);
+            backdrop-filter: blur(3px) saturate(1.05);
+            -webkit-backdrop-filter: blur(3px) saturate(1.05);
+            animation: backdropIn 200ms ease-out;
+        }
 
-/* Header */
-.dialog-header{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: var(--dialog-padding);
-  border-bottom: 1px solid rgba(0,0,0,0.06);
-  background: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.4));
-}
-.dialog-header h2{
-  margin: 0;
-  font-size: 1.125rem;
-  font-weight: 600;
-}
-.close-btn{
-  background: transparent;
-  border: none;
-  font-size: 1.05rem;
-  line-height: 1;
-  padding: 6px;
-  border-radius: 8px;
-  cursor: pointer;
-}
-.close-btn:focus{ box-shadow: 0 0 0 4px rgba(11,116,222,0.12); outline: none; }
+        /* Header */
+        .dialog-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: var(--dialog-padding);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.4));
+        }
 
-/* Body */
-.dialog-body{
-  padding: calc(var(--dialog-padding)) ;
-  font-size: 0.975rem;
-  color: var(--text);
-  line-height: 1.45;
-}
+        .dialog-header h2 {
+            margin: 0;
+            font-size: 1.125rem;
+            font-weight: 600;
+        }
 
-/* Actions (pogas) */
-.dialog-actions{
-  display: flex;
-  gap: 10px;
-  justify-content: flex-end;
-  padding: calc(var(--dialog-padding) - 6px);
-  border-top: 1px solid rgba(0,0,0,0.04);
-  background: transparent;
-}
-.dialog-actions button{
-  padding: 8px 14px;
-  border-radius: 8px;
-  border: 1px solid rgba(0,0,0,0.08);
-  background: transparent;
-  cursor: pointer;
-  font-weight: 600;
-}
-.dialog-actions button:focus{
-  outline: none;
-  box-shadow: 0 0 0 4px rgba(11,116,222,0.12);
-}
-.dialog-actions button.primary{
-  background: linear-gradient(180deg, var(--accent), #045fb3);
-  color: white;
-  border: none;
-}
+        .close-btn {
+            background: transparent;
+            border: none;
+            font-size: 1.05rem;
+            line-height: 1;
+            padding: 6px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
 
-/* Responsīvs: mazākā ekrānā izmanto pilnu augstumu */
-@media (max-width: 420px){
-  .app-dialog{
-    width: 100vw;
-    height: 100vh;
-    border-radius: 0;
-    display: flex;
-    flex-direction: column;
-  }
-  .dialog-body{
-    overflow: auto;
-    flex: 1 1 auto;
-  }
-  .dialog-actions{
-    padding: 12px;
-  }
-}
+        .close-btn:focus {
+            box-shadow: 0 0 0 4px rgba(11, 116, 222, 0.12);
+            outline: none;
+        }
 
-/* Pieejamības uzlabojumi: fokusējamais elements pirmais */
-.app-dialog[open] { /* ieteicams JS: fokusēt iekšējo pirmo fokusējamo elementu */
-  /* piemēram: document.querySelector('#myDialog').querySelector('button, [href], input, textarea').focus(); */
-}
+        /* Body */
+        .dialog-body {
+            padding: calc(var(--dialog-padding));
+            font-size: 0.975rem;
+            color: var(--text);
+            line-height: 1.45;
+        }
 
-/* Animācijas */
-@keyframes dialogIn{
-  from { transform: translateY(6px) scale(0.985); opacity: 0; }
-  to   { transform: translateY(0) scale(1); opacity: 1; }
-}
-@keyframes backdropIn{
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
+        /* Actions (pogas) */
+        .dialog-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            padding: calc(var(--dialog-padding) - 6px);
+            border-top: 1px solid rgba(0, 0, 0, 0.04);
+            background: transparent;
+        }
 
-        .text-center{
+        .dialog-actions button {
+            padding: 8px 14px;
+            border-radius: 8px;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            background: transparent;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .dialog-actions button:focus {
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(11, 116, 222, 0.12);
+        }
+
+        .dialog-actions button.primary {
+            background: linear-gradient(180deg, var(--accent), #045fb3);
+            color: white;
+            border: none;
+        }
+
+        /* Responsīvs: mazākā ekrānā izmanto pilnu augstumu */
+        @media (max-width: 420px) {
+            .app-dialog {
+                width: 100vw;
+                height: 100vh;
+                border-radius: 0;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .dialog-body {
+                overflow: auto;
+                flex: 1 1 auto;
+            }
+
+            .dialog-actions {
+                padding: 12px;
+            }
+        }
+
+        /* Pieejamības uzlabojumi: fokusējamais elements pirmais */
+        .app-dialog[open] {
+            /* ieteicams JS: fokusēt iekšējo pirmo fokusējamo elementu */
+            /* piemēram: document.querySelector('#myDialog').querySelector('button, [href], input, textarea').focus(); */
+        }
+
+        /* Animācijas */
+        @keyframes dialogIn {
+            from {
+                transform: translateY(6px) scale(0.985);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes backdropIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .text-center {
             text-align: center;
             padding: 20px;
         }
-   </style>
+    </style>
     <title>Document</title>
 
 
 </head>
+
 <body>
     <h1>Virsraksts</h1>
 
@@ -189,10 +218,72 @@
     <button id="btn_3">Palaist JS</button>
 
 
-    <script>
-        
-    </script>
+
+    <form id="contactForm" class="grid" novalidate>
+        <div>
+            <label for="name">Vārds un uzvārds <span aria-hidden="true">*</span></label>
+            <input id="name" name="name" type="text" autocomplete="name" required minlength="2"
+                placeholder="Jānis Bērziņš">
+            <div class="help" id="nameHelp">Minimālais garums: 2 simboli.</div>
+        </div>
+
+
+        <div>
+            <label for="email">E-pasts <span aria-hidden="true">*</span></label>
+            <input id="email" name="email" type="email" autocomplete="email" required placeholder="epasts@piemers.lv">
+            <div class="help" id="emailHelp">Lūdzu norādiet derīgu e-pasta adresi.</div>
+        </div>
+
+
+        <div>
+            <label for="phone">Telefons (pēc izvēles)</label>
+            <input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="+371 2 345 6789"
+                pattern="^\+?[0-9 \-()]{6,25}$">
+            <div class="help">Pieļaujami cipari, atstarpes, +, "-" un iekavas.</div>
+        </div>
+
+
+        <div>
+            <label for="subject">Tēma <span aria-hidden="true">*</span></label>
+            <select id="subject" name="subject" required>
+                <option value="">Izvēlieties tēmu...</option>
+                <option value="visp">Vispārīgi jautājumi</option>
+                <option value="atbalsts">Atbalsts</option>
+                <option value="sadarbiba">Sadarbība</option>
+            </select>
+        </div>
+
+
+        <div class="full">
+            <label for="message">Ziņa <span aria-hidden="true">*</span></label>
+            <textarea id="message" name="message" required minlength="10" placeholder="Jūsu ziņa..."></textarea>
+            <div class="help">Minimālais garums: 10 simboli.</div>
+        </div>
+
+
+        <div class="full checkbox">
+            <input id="consent" name="consent" type="checkbox" required>
+            <label for="consent">Piekrītu, ka mani dati tiks izmantoti saziņai (privātuma politika).</label>
+        </div>
+
+
+        <div class="full row" style="justify-content:space-between;align-items:center">
+            <div style="display:flex;flex-direction:column">
+                <small class="help">Mēs parasti atbildam 1-3 darba dienu laikā.</small>
+            </div>
+            <div style="display:flex;gap:8px">
+                <button id="submitBtn" type="submit">Sūtīt</button>
+                <button id="resetBtn" type="button">Notīrīt</button>
+            </div>
+        </div>
+
+
+        <div id="formMsg" class="full" aria-live="polite"></div>
+    </form>
+
+
 
 
 </body>
+
 </html>

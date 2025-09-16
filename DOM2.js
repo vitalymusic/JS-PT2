@@ -53,3 +53,22 @@ openDialogBtn.ondblclick = ()=>{
 }
 
 
+
+
+
+
+// bilžu rādīšana
+
+let pictDialog = document.createElement("dialog");
+dialogImg2  = document.createElement("img");
+dialogImg2.style.height = "90vh";
+
+pictDialog.append(dialogImg2);
+
+document.body.insertBefore(pictDialog,document.querySelector('h1'));
+
+function showImage(el){
+    console.log(el);
+    dialogImg2.src = el.src;
+    pictDialog.showModal();
+}
