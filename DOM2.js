@@ -38,3 +38,18 @@ let text = dialog1.getAttribute("data-open");
 dialogTitle.classList.add("text-center");
 
 
+
+
+
+openDialogBtn.onclick = ()=>{
+    dialog1.show();
+    openDialogBtn.innerText = "Paslēpt logu";
+}
+
+
+openDialogBtn.ondblclick = ()=>{
+    dialog1.close();
+    openDialogBtn.innerText = "Atvērt dialogu!";
+}
+
+
