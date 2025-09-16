@@ -197,6 +197,11 @@
             text-align: center;
             padding: 20px;
         }
+
+
+        .error{
+            border:2px solid red;
+        }
     </style>
     <title>Document</title>
 
@@ -219,7 +224,7 @@
 
 
 
-    <form id="contactForm" class="grid" novalidate>
+    <form id="contactForm" class="grid" novalidate action="">
         <div>
             <label for="name">Vārds un uzvārds <span aria-hidden="true">*</span></label>
             <input id="name" name="name" type="text" autocomplete="name" required minlength="2"
