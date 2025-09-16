@@ -36,13 +36,13 @@ let text = dialog1.getAttribute("data-open");
 
 // CSS klases pievienošana-noņemšana
 dialogTitle.classList.add("text-center");
-
+dialog1.classList.add("app-dialog");
 
 
 
 
 openDialogBtn.onclick = ()=>{
-    dialog1.show();
+    dialog1.showModal();
     openDialogBtn.innerText = "Paslēpt logu";
 }
 
