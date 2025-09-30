@@ -1,6 +1,7 @@
 let laiks = new Date();
 
 let tekosais = Date.now();
+
 let pec_nedelas = tekosais+(1000*60*60*24*7); //UTC laika un datuma formāts
 
 let laiks_pec_nedelas = new Date(pec_nedelas);

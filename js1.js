@@ -76,9 +76,7 @@ let address="https://picsum.photos/200/300";
 
 document.write("<img src="+address+">");  
 
-document.write(`<img 
-    src="${address}" 
-    width="400px">`);  
+document.write(`<img src="${address}" width="400px">`);  
 
 
 // Skaitļu funkcijas

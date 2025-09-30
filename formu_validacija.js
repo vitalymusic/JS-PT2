@@ -43,7 +43,7 @@ form1.onsubmit = (e)=>{
 
         // console.log(form1.querySelector(".errorDiv"));
 
-        if(errors){
+        if(errors.length > 0){
             form1.innerHTML +=`
                 <div class="error errorDiv">
                     <ul >

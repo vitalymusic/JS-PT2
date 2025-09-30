@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body class="bg-gradient">
+    <h1 class="text-6xl text-sky-800 mx-5 ">Tailwind CSS</h1>
+    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ratione enim, similique repellat doloribus neque velit blanditiis adipisci. Totam, placeat vel temporibus aliquam blanditiis, nihil, possimus ex vitae nemo illum quis?</p>
+    <img src="https://picsum.photos/200/300" alt="">
+
+
+
+    <script>
+        $(document).ready(()=>{
+            $('h1').click(()=>{
+                $('img').css({
+                    width:"600px",
+                    backgroundColor:"#343434"
+                })
+                $('p').text($('h1').text());
+                 $.get('https://jsonplaceholder.typicode.com/users/1/posts',(resp)=>{
+                    for(response of resp){
+                        $('p').append(`
+                            <h1 >${response.title}</h1>
+                            <p>${response.body}</p>
+                        `); 
+                    }
+                  })
+            })
+           
+
+
+
+        })
+
+    </script>
+</body>
+</html>
