@@ -18,7 +18,7 @@
     <h1 class="text-6xl text-sky-800 mx-5 ">Tailwind CSS</h1>
     <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ratione enim, similique repellat doloribus neque velit blanditiis adipisci. Totam, placeat vel temporibus aliquam blanditiis, nihil, possimus ex vitae nemo illum quis?</p>
     <div class="flex">
-        <a href="https://picsum.photos/id/1/200/300" data-lightbox="bildes1">
+        <!-- <a href="https://picsum.photos/id/1/200/300" data-lightbox="bildes1">
             <img src="https://picsum.photos/id/1/200/300" alt="">
         </a>
          <a href="https://picsum.photos/id/5/200/300" data-lightbox="bildes1">
@@ -35,7 +35,13 @@
          </a>
          <a href="https://picsum.photos/id/56/200/300" data-lightbox="bildes1">
             <img src="https://picsum.photos/id/56/200/300" alt="">
-        </a>
+        </a> -->
+
+        <img src="https://picsum.photos/id/1/200/300" alt="">
+        <img src="https://picsum.photos/id/5/200/300" alt="">
+        <img src="https://picsum.photos/id/10/200/300" alt="">
+        <img src="https://picsum.photos/id/78/200/300" alt="">
+
     </div>
     
 
@@ -60,7 +66,22 @@
             })
            
 
+            // Bilžu pārveide par hipersaitēm
 
+
+            const bildes = $('.flex img');
+            let bildesNr = 0;
+            for (bilde of bildes){
+                let src = $(bilde).attr("src");
+                $(bilde).remove();
+                $('.flex').append(`
+                    <a href="${src}" data-lightbox="Bildes" data-title="${bildesNr}">
+                        <img src="${src}" alt="">
+                    </a>
+                `);
+                console.log(src);
+                bildesNr++;
+            }
 
         })
 
